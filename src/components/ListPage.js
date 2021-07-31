@@ -2,6 +2,7 @@ import React from "react";
 import SearchBar from "./facilities/SearchBar";
 import Button from "./facilities/Button";
 import Logo from "../img/logo.png";
+import Result from "./Result";
 import "./ListPage.css";
 
 const ListPage = () => {
@@ -16,6 +17,9 @@ const ListPage = () => {
           <Button text="Search" />
         </div>
       </form>
+      <div className="col-12 justify-content-center">
+        <Result />
+      </div>
     </div>
   );
 };
