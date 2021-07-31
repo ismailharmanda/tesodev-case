@@ -1,10 +1,14 @@
 import React from "react";
 import "./ShowMore.css";
 
-const ShowMore = () => {
+const ShowMore = (props) => {
   return (
     <div className="row m-2">
-      <a className="twelve showmorelink text-center" href="/#">
+      <a
+        onClick={props.onClick}
+        className="twelve showmorelink text-center"
+        href="/#"
+      >
         Show more...
       </a>
     </div>

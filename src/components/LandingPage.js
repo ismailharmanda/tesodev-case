@@ -6,13 +6,12 @@ import ShowMore from "./facilities/ShowMore";
 
 import "./LandingPage.css";
 
-const LandingPage = () => {
+const LandingPage = (props) => {
   const [result, setResult] = useState([]);
   const getResult = (data) => {
     setResult(data);
   };
   const renderResult = () => {
-    console.log(result);
     if (result.length <= 3 && result.length > 0) {
       return result.map((result, index) => (
         <div key={index} className="col-8 ">
@@ -43,6 +42,9 @@ const LandingPage = () => {
       ));
     }
   };
+  const onClick = () => {
+    props.carryResult(result);
+  };
   return (
     <div className="row justify-content-center">
       <img className="logo col-12" alt="Logo" src={Logo} />
@@ -53,7 +55,7 @@ const LandingPage = () => {
         <SearchForm result={getResult} />
       </div>
       {renderResult()}
-      {result.length > 3 && <ShowMore />}
+      {result.length > 3 && <ShowMore onClick={onClick} />}
     </div>
   );
 };
