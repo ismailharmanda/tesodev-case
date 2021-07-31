@@ -26,7 +26,7 @@ const LandingPage = (props) => {
           />
         </div>
       ));
-    } else if (result.length > 0) {
+    } else if (result.length > 3) {
       return result.slice(0, 3).map((result) => (
         <div key={result[0]} className="col-8 ">
           <Result

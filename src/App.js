@@ -10,8 +10,8 @@ const App = () => {
   };
   return (
     <>
-      <ListPage result={data} />
       <LandingPage carryResult={passResult} />
+      <ListPage result={data} />
     </>
   );
 };

@@ -9,8 +9,13 @@ import data from "../data/mockData.json";
 import "./ListPage.css";
 
 const ListPage = (props) => {
+  const [length, setLength] = useState(0);
   const [term, setTerm] = useState("");
   const [list, setList] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemPerPage = 6;
+  const lastItemIndex = currentPage * itemPerPage;
+  const firstItemIndex = currentPage * itemPerPage - itemPerPage;
   const getInput = (value) => {
     setTerm(value);
   };
@@ -27,10 +32,14 @@ const ListPage = (props) => {
     );
     setList(filteredResult);
     setTerm("");
+    setLength(filteredResult.length);
   };
   const renderResult = () => {
     if (props.result.length > 0) {
-      return props.result.map((result, index) => (
+      const filteredList = props.result.filter(
+        (list, index) => index < lastItemIndex && index >= firstItemIndex
+      );
+      return filteredList.map((result, index) => (
         <Result
           key={index}
           id={index}
@@ -46,7 +55,10 @@ const ListPage = (props) => {
   };
   const renderOwnResult = () => {
     if (list.length > 0) {
-      return list.map((list, index) => (
+      const fiteredList = list.filter(
+        (list, index) => index < lastItemIndex && index >= firstItemIndex
+      );
+      return fiteredList.map((list, index) => (
         <Result
           key={index}
           id={index}
@@ -59,6 +71,9 @@ const ListPage = (props) => {
         />
       ));
     }
+  };
+  const paginate = (number) => {
+    setCurrentPage(number);
   };
   return (
     <div className="row mt-5 justify-content-center">
@@ -76,7 +91,11 @@ const ListPage = (props) => {
       </div>
       <div className="col-8">{renderOwnResult() || renderResult()}</div>
       <div className="d-flex col-8 justify-content-center mt-5">
-        <Pagination />
+        <Pagination
+          paginate={paginate}
+          itemPerPage={itemPerPage}
+          totalItem={length || props.result.length}
+        />
       </div>
     </div>
   );
