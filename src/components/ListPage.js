@@ -4,6 +4,7 @@ import Button from "./facilities/Button";
 import Logo from "../img/logo.png";
 import Result from "./Result";
 import Dropdown from "./facilities/Dropdown";
+import Pagination from "./facilities/Pagination";
 import "./ListPage.css";
 
 const ListPage = () => {
@@ -29,6 +30,9 @@ const ListPage = () => {
       </div>
       <div className="col-8">
         <Result />
+      </div>
+      <div className="d-flex col-8 justify-content-center mt-5">
+        <Pagination />
       </div>
     </div>
   );

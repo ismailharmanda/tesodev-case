@@ -4,7 +4,7 @@ import ListPage from "./components/ListPage";
 import "./App.css";
 
 const App = () => {
-  return <ListPage />;
+  return <LandingPage />;
 };
 
 export default App;

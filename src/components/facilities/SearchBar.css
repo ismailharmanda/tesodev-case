@@ -1,3 +1,6 @@
-.longhBar {
-  width: 50vw;
+.longBar:hover {
+  background: rgba(100, 100, 100, 0.08);
+}
+.longBar:focus {
+  background: rgba(100, 100, 100, 0.08);
 }

@@ -1,14 +1,18 @@
 import React from "react";
 import "./Result.css";
 
-const Result = () => {
+const Result = (props) => {
   return (
-    <div className="row result m-2">
+    <div id={props.id} className="row result m-2">
       <div className="row">
-        <div className="col-6 text-left">Turkey - Ankara</div>
-        <div className="col-6 text-left">Email: abc@xyz.com</div>
+        <div className="col-6 text-left">
+          {props.country} - {props.city}
+        </div>
+        <div className="col-6 text-left">Email: {props.mail}</div>
         <div className="col-12 text-left">
-          <small>Jane Doe - 2016</small>
+          <small>
+            {props.name} - {props.date}
+          </small>
         </div>
         <hr className="line" />
       </div>

@@ -11,7 +11,7 @@ const Dropdown = () => {
         data-bs-toggle="dropdown"
         aria-expanded="false"
       >
-        <i class="fas fa-sort"> </i>&nbsp; Order By
+        <i className="fas fa-sort"> </i>&nbsp; Order By
       </button>
       <ul
         className="dropdown-menu fourteen"
