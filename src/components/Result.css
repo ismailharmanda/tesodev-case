@@ -1,5 +1,6 @@
-.result {
-  margin-left: 12.5vw;
+.result:hover {
+  background: #c4c4c4;
+  cursor: pointer;
 }
 .line {
   width: 65vw;
