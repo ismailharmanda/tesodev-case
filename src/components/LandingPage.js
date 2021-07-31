@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import SearchForm from "./SearchForm";
 import Logo from "../img/logo.png";
 import Result from "./Result";
+import ShowMore from "./facilities/ShowMore";
 
 import "./LandingPage.css";
 
@@ -12,21 +13,35 @@ const LandingPage = () => {
   };
   const renderResult = () => {
     console.log(result);
-    return (
-      result.length > 0 &&
-      result.map((result) => (
-        <Result
-          key={result[0]}
-          id={result[0]}
-          name={result[0]}
-          date={result[3]}
-          mail={result[2]}
-          country={result[4]}
-          city={result[5]}
-          company={result[1]}
-        />
-      ))
-    );
+    if (result.length <= 3 && result.length > 0) {
+      return result.map((result, index) => (
+        <div key={index} className="col-8 ">
+          <Result
+            id={index}
+            name={result[0]}
+            date={result[3]}
+            mail={result[2]}
+            country={result[4]}
+            city={result[5]}
+            company={result[1]}
+          />
+        </div>
+      ));
+    } else if (result.length > 0) {
+      return result.slice(0, 3).map((result) => (
+        <div key={result[0]} className="col-8 ">
+          <Result
+            id={result[0]}
+            name={result[0]}
+            date={result[3]}
+            mail={result[2]}
+            country={result[4]}
+            city={result[5]}
+            company={result[1]}
+          />
+        </div>
+      ));
+    }
   };
   return (
     <div className="row justify-content-center">
@@ -38,6 +53,7 @@ const LandingPage = () => {
         <SearchForm result={getResult} />
       </div>
       {renderResult()}
+      {result.length > 3 && <ShowMore />}
     </div>
   );
 };
