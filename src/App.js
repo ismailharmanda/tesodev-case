@@ -1,7 +1,13 @@
 import React from "react";
+import LandingPage from "./components/LandingPage";
+import "./App.css";
 
 const App = () => {
-  return <div>Search Bar</div>;
+  return (
+    <>
+      <LandingPage />
+    </>
+  );
 };
 
 export default App;
