@@ -7,12 +7,16 @@ const SearchBar = (props) => {
     setInput(e.target.value);
     props.input(e.target.value);
   };
+  const onInputSubmit = (e) => {
+    e.preventDefault();
+  };
   return (
     <div className="col-12 col-md-10">
       <label htmlFor="searchInput" className="visually-hidden">
         Search
       </label>
       <input
+        onSubmit={onInputSubmit}
         value={props.term}
         onChange={onInputChange}
         placeholder="Search"

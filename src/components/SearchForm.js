@@ -14,17 +14,19 @@ const SearchForm = (props) => {
   };
   const searchTerm = (e) => {
     e.preventDefault();
-    const filteredResult = data.data.filter(
-      (data) =>
-        data[0].toLowerCase().includes(term.toLowerCase()) ||
-        data[1].toLowerCase().includes(term.toLowerCase()) ||
-        data[2].toLowerCase().includes(term.toLowerCase()) ||
-        data[3].toLowerCase().includes(term.toLowerCase()) ||
-        data[4].toLowerCase().includes(term.toLowerCase()) ||
-        data[5].toLowerCase().includes(term.toLowerCase())
-    );
-    props.result(filteredResult);
-    setTerm("");
+    if (term.length > 0) {
+      const filteredResult = data.data.filter(
+        (data) =>
+          data[0].toLowerCase().includes(term.toLowerCase()) ||
+          data[1].toLowerCase().includes(term.toLowerCase()) ||
+          data[2].toLowerCase().includes(term.toLowerCase()) ||
+          data[3].toLowerCase().includes(term.toLowerCase()) ||
+          data[4].toLowerCase().includes(term.toLowerCase()) ||
+          data[5].toLowerCase().includes(term.toLowerCase())
+      );
+      props.result(filteredResult);
+      setTerm("");
+    }
   };
   return (
     <form onSubmit={searchTerm} className="row midForm align-items-center">
