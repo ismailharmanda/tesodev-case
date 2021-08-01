@@ -1,8 +1,9 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import "./Pagination.css";
 
-const Pagination = ({ itemPerPage, totalItem, paginate }) => {
+const Pagination = ({ itemPerPage, totalItem, paginate, next, previous }) => {
   const pageNumbers = [];
   for (let i = 1; i <= Math.ceil(totalItem / itemPerPage); i++) {
     pageNumbers.push(i);
@@ -11,27 +12,35 @@ const Pagination = ({ itemPerPage, totalItem, paginate }) => {
     <nav>
       <ul className="pagination">
         <li className="page-item mx-1">
-          <a className="page-link fourteen text-dark px-5" href="/#">
+          <Link
+            onClick={() => previous(pageNumbers.length)}
+            className="page-link fourteen text-dark px-5"
+            to="/list"
+          >
             Previous
-          </a>
+          </Link>
         </li>
         {pageNumbers.map((number) => {
           return (
             <li key={number} className={"page-item mx-1"}>
-              <a
+              <Link
                 onClick={() => paginate(number)}
-                href="/#"
+                to="/list"
                 className="page-link fourteen text-dark px-5"
               >
                 {number}
-              </a>
+              </Link>
             </li>
           );
         })}
         <li className="page-item mx-1">
-          <a className="page-link fourteen text-dark px-5" href="/#">
+          <Link
+            onClick={() => next(pageNumbers.length)}
+            className="page-link fourteen text-dark px-5"
+            to="/list"
+          >
             Next
-          </a>
+          </Link>
         </li>
       </ul>
     </nav>

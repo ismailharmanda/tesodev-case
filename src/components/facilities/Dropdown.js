@@ -1,7 +1,8 @@
 import React from "react";
 import "./Dropdown.css";
+import { Link } from "react-router-dom";
 
-const Dropdown = () => {
+const Dropdown = (props) => {
   return (
     <div className="dropdown">
       <button
@@ -18,24 +19,40 @@ const Dropdown = () => {
         aria-labelledby="dropdownMenuButton1"
       >
         <li>
-          <a className="dropdown-item" href="/#">
+          <Link
+            onClick={() => props.order("na")}
+            className="dropdown-item"
+            to="/list"
+          >
             Name ascending
-          </a>
+          </Link>
         </li>
         <li>
-          <a className="dropdown-item" href="/#">
+          <Link
+            onClick={() => props.order("nd")}
+            className="dropdown-item"
+            to="/list"
+          >
             Name descending
-          </a>
+          </Link>
         </li>
         <li>
-          <a className="dropdown-item" href="/#">
+          <Link
+            onClick={() => props.order("ya")}
+            className="dropdown-item"
+            to="/list"
+          >
             Year ascending
-          </a>
+          </Link>
         </li>
         <li>
-          <a className="dropdown-item" href="/#">
+          <Link
+            onClick={() => props.order("yd")}
+            className="dropdown-item"
+            to="/list"
+          >
             Year descending
-          </a>
+          </Link>
         </li>
       </ul>
     </div>

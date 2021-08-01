@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import SearchBar from "./facilities/SearchBar";
 import Button from "./facilities/Button";
 import Logo from "../img/logo.png";
@@ -16,6 +16,7 @@ const ListPage = (props) => {
   const itemPerPage = 6;
   const lastItemIndex = currentPage * itemPerPage;
   const firstItemIndex = currentPage * itemPerPage - itemPerPage;
+  let passedResult = props.result;
   const getInput = (value) => {
     setTerm(value);
   };
@@ -35,8 +36,8 @@ const ListPage = (props) => {
     setLength(filteredResult.length);
   };
   const renderResult = () => {
-    if (props.result.length > 0) {
-      const filteredList = props.result.filter(
+    if (passedResult.length > 0) {
+      const filteredList = passedResult.filter(
         (list, index) => index < lastItemIndex && index >= firstItemIndex
       );
       return filteredList.map((result, index) => (
@@ -55,25 +56,82 @@ const ListPage = (props) => {
   };
   const renderOwnResult = () => {
     if (list.length > 0) {
-      const fiteredList = list.filter(
-        (list, index) => index < lastItemIndex && index >= firstItemIndex
-      );
-      return fiteredList.map((list, index) => (
-        <Result
-          key={index}
-          id={index}
-          name={list[0]}
-          date={list[3]}
-          mail={list[2]}
-          country={list[4]}
-          city={list[5]}
-          company={list[1]}
-        />
-      ));
+      return list
+        .filter(
+          (list, index) => index < lastItemIndex && index >= firstItemIndex
+        )
+        .map((list, index) => (
+          <Result
+            key={index}
+            id={index}
+            name={list[0]}
+            date={list[3]}
+            mail={list[2]}
+            country={list[4]}
+            city={list[5]}
+            company={list[1]}
+          />
+        ));
     }
   };
+
   const paginate = (number) => {
     setCurrentPage(number);
+  };
+  const order = (type) => {
+    props.orderType(type);
+    switch (type) {
+      case "na":
+        setList((prev) => prev.sort((a, b) => a[0][0].localeCompare(b[0][0])));
+        break;
+      case "nd":
+        setList((prev) => prev.sort((a, b) => b[0][0].localeCompare(a[0][0])));
+        break;
+      case "ya":
+        setList((prev) =>
+          prev.sort((a, b) => {
+            let dateA = new Date(
+              a[3].slice(-4),
+              a[3].slice(3, 5),
+              a[3].slice(0, 2)
+            );
+            let dateB = new Date(
+              b[3].slice(-4),
+              b[3].slice(3, 5),
+              b[3].slice(0, 2)
+            );
+            return dateA - dateB;
+          })
+        );
+        break;
+      case "yd":
+        setList((prev) =>
+          prev.sort((a, b) => {
+            let dateA = new Date(
+              a[3].slice(-4),
+              a[3].slice(3, 5),
+              a[3].slice(0, 2)
+            );
+            let dateB = new Date(
+              b[3].slice(-4),
+              b[3].slice(3, 5),
+              b[3].slice(0, 2)
+            );
+            return dateB - dateA;
+          })
+        );
+        break;
+      default:
+    }
+  };
+  useEffect(() => {
+    renderOwnResult();
+  });
+  const next = (pageNumbers) => {
+    currentPage < pageNumbers && setCurrentPage((prev) => prev + 1);
+  };
+  const previous = (pageNumbers) => {
+    currentPage > 1 && setCurrentPage((prev) => prev - 1);
   };
   return (
     <div className="row mt-5 justify-content-center">
@@ -87,11 +145,13 @@ const ListPage = (props) => {
         </div>
       </form>
       <div className="col-2 offset-10 mt-5">
-        <Dropdown />
+        <Dropdown order={order} />
       </div>
       <div className="col-8">{renderOwnResult() || renderResult()}</div>
       <div className="d-flex col-8 justify-content-center mt-5">
         <Pagination
+          previous={previous}
+          next={next}
           paginate={paginate}
           itemPerPage={itemPerPage}
           totalItem={length || props.result.length}
@@ -100,5 +160,4 @@ const ListPage = (props) => {
     </div>
   );
 };
-
 export default ListPage;
