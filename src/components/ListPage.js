@@ -6,6 +6,7 @@ import Result from "./Result";
 import Dropdown from "./facilities/Dropdown";
 import Pagination from "./facilities/Pagination";
 import data from "../data/mockData.json";
+import { Link } from "react-router-dom";
 import "./ListPage.css";
 
 const ListPage = (props) => {
@@ -136,7 +137,9 @@ const ListPage = (props) => {
   return (
     <div className="row mt-5 justify-content-center">
       <div className="col-2">
-        <img className="smallLogo" alt="Logo" src={Logo}></img>
+        <Link to="/">
+          <img className="smallLogo" alt="Logo" src={Logo}></img>
+        </Link>
       </div>
       <form className="col-10">
         <div className="row">
